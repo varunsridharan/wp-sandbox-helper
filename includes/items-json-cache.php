@@ -44,8 +44,39 @@ class Items_JSON {
 					self::$data[ $item['slug'] ] = $item;
 				}
 				set_site_transient( WP_SANDBOX_HELPER_DB, self::$data, DAY_IN_SECONDS );
+				self::update_demo_toolbar();
 			}
 		}
+	}
+
+	/**
+	 * Updates Custom Data to showcase other demo sites
+	 */
+	public static function update_demo_toolbar() {
+		$toolbar           = get_option( 'mp_demo_toolbar', true );
+		$toolbar           = ( ! is_array( $toolbar ) ) ? array(
+			'show_toolbar' => 1,
+			'unpermitted'  => array(),
+			'logo'         => '',
+			'btn_text'     => '',
+			'btn_url'      => '',
+			'btn_class'    => '',
+			'background'   => '',
+		) : $toolbar;
+		$toolbar['select'] = array();
+		foreach ( self::$data as $slug => $item ) {
+			$toolbar['select'][ $item['id'] ] = array(
+				'link_id'   => $item['id'],
+				'text'      => $item['name'],
+				'link'      => $item['demo_site'],
+				'img'       => '',
+				'btn_text'  => 'Buy Now',
+				'btn_url'   => $item['ref_url'],
+				'btn_class' => '',
+			);
+		}
+
+		update_option( 'mp_demo_toolbar', $toolbar );
 	}
 
 
