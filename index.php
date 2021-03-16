@@ -25,6 +25,9 @@ define( 'WP_SANDBOX_LOCAL_DOMAIN', 'wptest.pc' );
 define( 'WP_SANDBOX_LOCAL_DOMAIN_SITE', 'zip-pin-postal-code-validator-for-woocommerce' );
 define( 'WP_SANDBOX_CURRENT_SITE', wp_sandbox_helper_get_current_demo_item() );
 
-require_once 'includes/hooks.php';
 require_once 'includes/items-json-cache.php';
-require_once 'includes/homepage.php';
+require_once 'includes/wp-demo-hooks.php';
+require_once 'includes/wp-hooks.php';
+require_once 'includes/wp-overrides.php';
+require_once 'includes/wp-remove.php';
+require_once 'includes/wp-shortcode.php';
