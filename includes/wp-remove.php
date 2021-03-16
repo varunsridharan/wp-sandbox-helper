@@ -30,11 +30,8 @@ final class WP_Remove {
 	 * @since {NEWVERSION}
 	 */
 	public static function remove_toolbar_items( $wp_adminbar ) {
-		$wp_adminbar->remove_node( 'user-actions' );
-		$wp_adminbar->remove_node( 'edit-profile' );
 		$wp_adminbar->remove_node( 'wp-logo' );
 		$wp_adminbar->remove_node( 'search' );
-		$wp_adminbar->remove_node( 'site-name' );
 		$wp_adminbar->remove_node( 'customize' );
 		$wp_adminbar->remove_node( 'updates' );
 		$wp_adminbar->remove_node( 'comments' );
