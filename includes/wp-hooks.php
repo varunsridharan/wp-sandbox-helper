@@ -14,6 +14,38 @@ final class WP_Hooks {
 	 */
 	public static function init() {
 		add_action( 'phpmailer_init', array( __CLASS__, 'smtp' ) );
+		add_action( 'nd_create_sandbox', array( __CLASS__, 'add_custom_user' ) );
+		add_action( 'nd_delete_sandbox', array( __CLASS__, 'delete_custom_user' ) );
+	}
+
+	/**
+	 * Adds Custom Users To Demo Site.
+	 *
+	 * @param $blog_id
+	 */
+	public static function add_custom_user( $blog_id ) {
+		add_user_to_blog( $blog_id, 10, 'customer1' );
+		add_user_to_blog( $blog_id, 3, 'customer2' );
+		add_user_to_blog( $blog_id, 6, 'procustomer1' );
+		add_user_to_blog( $blog_id, 7, 'procustomer2' );
+		add_user_to_blog( $blog_id, 4, 'seller1' );
+		add_user_to_blog( $blog_id, 5, 'seller2' );
+		add_user_to_blog( $blog_id, 8, 'manager1' );
+		add_user_to_blog( $blog_id, 9, 'manager2' );
+	}
+
+	/**
+	 * @param $blog_id
+	 */
+	public static function delete_custom_user( $blog_id ) {
+		remove_user_from_blog( 10, $blog_id );
+		remove_user_from_blog( 3, $blog_id );
+		remove_user_from_blog( 6, $blog_id );
+		remove_user_from_blog( 7, $blog_id );
+		remove_user_from_blog( 4, $blog_id );
+		remove_user_from_blog( 5, $blog_id );
+		remove_user_from_blog( 8, $blog_id );
+		remove_user_from_blog( 9, $blog_id );
 	}
 
 	/**
