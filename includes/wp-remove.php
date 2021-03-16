@@ -18,6 +18,28 @@ final class WP_Remove {
 		remove_action( 'welcome_panel', 'wp_welcome_panel' );
 		add_action( 'widgets_init', array( __CLASS__, 'remove_site_widgets' ), 9999 );
 		add_action( 'wp_dashboard_setup', array( __CLASS__, 'remove_dashboard_widgets' ), 9999 );
+		add_action( 'admin_bar_menu', array( __CLASS__, 'remove_toolbar_items' ), 9999 );
+	}
+
+	/**
+	 * Removes Default Unwanted Admin Bar Menus
+	 *
+	 * @param $wp_adminbar
+	 *
+	 * @static
+	 * @since {NEWVERSION}
+	 */
+	public static function remove_toolbar_items( $wp_adminbar ) {
+		$wp_adminbar->remove_node( 'user-actions' );
+		$wp_adminbar->remove_node( 'edit-profile' );
+		$wp_adminbar->remove_node( 'wp-logo' );
+		$wp_adminbar->remove_node( 'search' );
+		$wp_adminbar->remove_node( 'site-name' );
+		$wp_adminbar->remove_node( 'customize' );
+		$wp_adminbar->remove_node( 'updates' );
+		$wp_adminbar->remove_node( 'comments' );
+		$wp_adminbar->remove_node( 'new-content' );
+		$wp_adminbar->remove_node( 'edit' );
 	}
 
 	/**
