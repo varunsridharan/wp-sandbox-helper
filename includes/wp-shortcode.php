@@ -38,7 +38,7 @@ final class Shortcode {
 			$html .= '</ul>';
 		}
 		$html .= '[/is_sandbox]';
-		return $html;
+		return do_shortcode( $html );
 	}
 }
 
