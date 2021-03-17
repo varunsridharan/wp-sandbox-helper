@@ -14,6 +14,8 @@ final class WP_Demo_Hooks {
 	 */
 	public static function init() {
 		add_filter( 'wpmu_drop_tables', array( __CLASS__, 'delete_custom_tables' ) );
+		add_action( 'mp_demo_create_sandbox', array( __CLASS__, 'add_custom_user' ) );
+		add_action( 'mp_demo_delete_sandbox', array( __CLASS__, 'delete_custom_user' ) );
 	}
 
 	/**
@@ -45,7 +47,41 @@ final class WP_Demo_Hooks {
 		$tables[] = $wpdb->prefix . 'woocommerce_tax_rate_locations';
 		$tables[] = $wpdb->prefix . 'blogmeta';
 		$tables[] = $wpdb->prefix . 'loginizer_logs';
+		$tables[] = $wpdb->prefix . 'blogmeta';
 		return $tables;
+	}
+
+	/**
+	 * Adds Custom Users To Demo Site.
+	 *
+	 * @param $blog_id
+	 */
+	public static function add_custom_user( $blog_id ) {
+		add_user_to_blog( $blog_id, 10, 'customer' );
+		add_user_to_blog( $blog_id, 3, 'customer' );
+		add_user_to_blog( $blog_id, 6, 'pro-customer' );
+		add_user_to_blog( $blog_id, 7, 'pro-customer' );
+		add_user_to_blog( $blog_id, 4, 'wholesaler' );
+		add_user_to_blog( $blog_id, 5, 'wholesaler' );
+		add_user_to_blog( $blog_id, 8, 'shop_manager' );
+		add_user_to_blog( $blog_id, 9, 'shop_manager' );
+	}
+
+	/**
+	 * Deletes Custom Users.
+	 *
+	 * @param $blog_id
+	 */
+	public static function delete_custom_user( $blog_id ) {
+		remove_user_from_blog( 10, $blog_id );
+		remove_user_from_blog( 3, $blog_id );
+		remove_user_from_blog( 6, $blog_id );
+		remove_user_from_blog( 7, $blog_id );
+		remove_user_from_blog( 4, $blog_id );
+		remove_user_from_blog( 5, $blog_id );
+		remove_user_from_blog( 8, $blog_id );
+		remove_user_from_blog( 9, $blog_id );
 	}
 }
 
+WP_Demo_Hooks::init();
