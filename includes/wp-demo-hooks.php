@@ -11,10 +11,14 @@ namespace WP_Sandbox_Helper;
 final class WP_Demo_Hooks {
 	/**
 	 * Inits Class.
+	 *
+	 * @uses delete_custom_tables
+	 * @uses delete_custom_user
+	 * @uses add_custom_user
 	 */
 	public static function init() {
 		add_filter( 'wpmu_drop_tables', array( __CLASS__, 'delete_custom_tables' ) );
-		add_action( 'mp_demo_create_sandbox', array( __CLASS__, 'add_custom_user' ) );
+		add_action( 'mp_demo_create_sandbox', array( __CLASS__, 'add_custom_user' ), 10, 2 );
 		add_action( 'mp_demo_delete_sandbox', array( __CLASS__, 'delete_custom_user' ) );
 	}
 
@@ -56,15 +60,15 @@ final class WP_Demo_Hooks {
 	 *
 	 * @param $blog_id
 	 */
-	public static function add_custom_user( $blog_id ) {
-		add_user_to_blog( $blog_id, 10, 'customer' );
-		add_user_to_blog( $blog_id, 3, 'customer' );
-		add_user_to_blog( $blog_id, 6, 'pro-customer' );
-		add_user_to_blog( $blog_id, 7, 'pro-customer' );
-		add_user_to_blog( $blog_id, 4, 'wholesaler' );
-		add_user_to_blog( $blog_id, 5, 'wholesaler' );
-		add_user_to_blog( $blog_id, 8, 'shop_manager' );
-		add_user_to_blog( $blog_id, 9, 'shop_manager' );
+	public static function add_custom_user( $source_blog_id, $target_blog_id ) {
+		add_user_to_blog( $target_blog_id, 10, 'customer' );
+		add_user_to_blog( $target_blog_id, 3, 'customer' );
+		add_user_to_blog( $target_blog_id, 6, 'pro-customer' );
+		add_user_to_blog( $target_blog_id, 7, 'pro-customer' );
+		add_user_to_blog( $target_blog_id, 4, 'wholesaler' );
+		add_user_to_blog( $target_blog_id, 5, 'wholesaler' );
+		add_user_to_blog( $target_blog_id, 8, 'shop_manager' );
+		add_user_to_blog( $target_blog_id, 9, 'shop_manager' );
 	}
 
 	/**
