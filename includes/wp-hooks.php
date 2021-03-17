@@ -14,6 +14,15 @@ final class WP_Hooks {
 	 */
 	public static function init() {
 		add_action( 'phpmailer_init', array( __CLASS__, 'smtp' ) );
+		add_action( 'wp_head', array( __CLASS__, 'add_webmonitize' ), 1 );
+		add_action( 'admin_head', array( __CLASS__, 'add_webmonitize' ), 1 );
+	}
+
+	/**
+	 * Adds Web Monitize Code.
+	 */
+	public static function add_webmonitize() {
+		echo '<meta name="monetization" content="$ilp.uphold.com/23yja9PWqf3b">';
 	}
 
 	/**
