@@ -14,8 +14,8 @@ final class WP_Hooks {
 	 */
 	public static function init() {
 		add_action( 'phpmailer_init', array( __CLASS__, 'smtp' ) );
-		add_action( 'nd_create_sandbox', array( __CLASS__, 'add_custom_user' ) );
-		add_action( 'nd_delete_sandbox', array( __CLASS__, 'delete_custom_user' ) );
+		add_action( 'mp_demo_create_sandbox', array( __CLASS__, 'add_custom_user' ) );
+		add_action( 'mp_demo_delete_sandbox', array( __CLASS__, 'delete_custom_user' ) );
 	}
 
 	/**
@@ -35,6 +35,8 @@ final class WP_Hooks {
 	}
 
 	/**
+	 * Deletes Custom Users.
+	 *
 	 * @param $blog_id
 	 */
 	public static function delete_custom_user( $blog_id ) {
