@@ -23,32 +23,10 @@ class Items_JSON {
 	 * @static
 	 */
 	public static function init() {
-		if ( empty( self::get() ) ) {
-			self::fetch();
-		}
+		global $envato_items;
+		self::$data = $envato_items;
+		#self::update_demo_toolbar();
 	}
-
-	/**
-	 * @static
-	 * @since {NEWVERSION}
-	 */
-	protected static function fetch() {
-		$data = wp_remote_get( WP_SANDBOX_HELPER_ITEMS_JSON_URL );
-		if ( ! is_wp_error( $data ) ) {
-			$response = wp_remote_retrieve_body( $data );
-			$response = json_decode( $response, true );
-			if ( isset( $response['plugins'] ) ) {
-				$data = $response['plugins'];
-
-				foreach ( $data as $item ) {
-					self::$data[ $item['slug'] ] = $item;
-				}
-				set_site_transient( WP_SANDBOX_HELPER_DB, self::$data, DAY_IN_SECONDS );
-				self::update_demo_toolbar();
-			}
-		}
-	}
-
 	/**
 	 * Updates Custom Data to showcase other demo sites
 	 */
@@ -110,16 +88,6 @@ class Items_JSON {
 	protected static function db_key() {
 		return WP_SANDBOX_HELPER_DB . '_items_json';
 	}
-
-	/**
-	 * Fetches Data From DB.
-	 */
-	protected static function get() {
-		self::$data = get_site_transient( WP_SANDBOX_HELPER_DB );
-		return self::$data;
-	}
-
-
 }
 
 Items_JSON::init();
